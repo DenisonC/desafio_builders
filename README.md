@@ -25,3 +25,22 @@ Aqui vamos usar uma série de modulos Node.js ára executar várias operações 
 - describeVpcs
 
 - deleteSecurityGroup
+
+
+Pré requsiitos
+
+Para configurar e executar conlclua os pré requisitos abaixo:
+
+- Buildar a imagem contendo o o Node.js
+- Criar uma arquivo de configuração com as credenciais AWS 
+
+Para buildar a imagem da nossa API vamos executar o seguinte comando:
+
+$ docker run -t node-docker . 
+
+Você pode manter seus dados de credenciais da AWS em um arquivo compartilhado usado por SDKs e pela interface de linha de comando. Quando o SDK para JavaScript é carregado, ele pesquisa automaticamente o arquivo de credenciais compartilhado, denominado "credenciais". Onde você mantém o arquivo de credenciais compartilhadas depende do seu sistema operacional:
+
+- O arquivo de credenciais compartilhadas no Linux, Unix e macOS: ~/.aws/credentials
+
+
+
