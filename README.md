@@ -18,29 +18,54 @@ Aqui vamos usar uma série de modulos Node.js ára executar várias operações 
 
 - describeSecurityGroups
 
-- authorizeSecurityGroupIngress
-
 - createSecurityGroup
 
-- describeVpcs
-
 - deleteSecurityGroup
+
+- authorizeSecurityGroupIngress
 
 
 Pré requsiitos
 
 Para configurar e executar conlclua os pré requisitos abaixo:
 
-- Buildar a imagem contendo o o Node.js
 - Criar uma arquivo de configuração com as credenciais AWS 
-
-Para buildar a imagem da nossa API vamos executar o seguinte comando:
-
-$ docker run -t node-docker . 
+- Buildar a imagem contendo o o Node.js
 
 Você pode manter seus dados de credenciais da AWS em um arquivo compartilhado usado por SDKs e pela interface de linha de comando. Quando o SDK para JavaScript é carregado, ele pesquisa automaticamente o arquivo de credenciais compartilhado, denominado "credenciais". Onde você mantém o arquivo de credenciais compartilhadas depende do seu sistema operacional:
 
 - O arquivo de credenciais compartilhadas no Linux, Unix e macOS: ~/.aws/credentials
+
+Insira o usuário e a key no arquivo credentials. 
+
+
+Para buildar a imagem da nossa API vamos executar o seguinte comando:
+
+$ docker run -t node-docker-img . 
+
+Execute o container da imagem
+
+$ docker run -dit --name node-docker node-docker-img
+
+Com o container rodando execute o comando para acessar o contânier da API e executar as ações necessárias:
+----------------------------------------------------------
+1 - describeSecurityGroups
+
+Edite o arquivo ecs_describesecuritygroups.js, e inclua os IDs dos grupos de segurança que você deseja descrever. Depois chame odescribeSecurityGroupsMétodo do objeto de serviço do Amazon EC2.
+
+$ node ec2_describesecuritygroups.js
+
+---------------------------------------------------------
+2 - - createSecurityGroup
+
+No arquivo ec2_createsecuritygroup altere os parâmetros que especificam o nome do grupo de segurança, uma descrição e o ID da VPC. Passe os parâmetros para o método createSecurityGroup e execute.
+
+$ node ec2_createsecuritygroup.js
+
+
+
+
+
 
 
 
