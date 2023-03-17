@@ -1,7 +1,9 @@
 # desafio_builders
 Desafio técnico Builders
+----------------------------------------------------
 
 Trabalhando com grupos de segurança na Amazen EC2
+----------------------------------------------------
 
 Aqui vamos trabalhar com o Node.js
 
@@ -10,6 +12,7 @@ Aqui vamos trabalhar com o Node.js
 - Como deletar um grupo de segurança existente
 
 O cenário 
+------------------------------------
 
 O grupo de segurança da Amazon EC2 atua como um firewall virtual que controla o tráfego para uma ou várias intâncias. Em cada grupo é adicionado as regras para permitir o tráfego de ou para suas intâncias associadas. 
 Nesta API vc poderá aplicar as regras autmaticamente a todas a instâncias associadas ao grupo de segurança
@@ -26,6 +29,7 @@ Aqui vamos usar uma série de modulos Node.js ára executar várias operações 
 
 
 Pré requsiitos
+-----------------------------------
 
 Para configurar e executar conlclua os pré requisitos abaixo:
 
@@ -48,6 +52,7 @@ Execute o container da imagem
 $ docker run -dit --name node-docker node-docker-img
 
 Com o container rodando execute o comando para acessar o contânier da API e executar as ações necessárias:
+
 ----------------------------------------------------------
 1 - describeSecurityGroups
 
