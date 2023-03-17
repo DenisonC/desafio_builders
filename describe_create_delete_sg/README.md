@@ -5,10 +5,12 @@ Desafio técnico Builders
 Trabalhando com grupos de segurança na Amazen EC2
 ----------------------------------------------------
 
-Aqui vamos trabalhar com o Node.js
+Aqui vamos trabalhar com o Node.js e AWS SDK
 
 - Como recuperar informaçãoes sobre seus grupos de segurança 
+
 - Como criar um grupo de segurança para acessar uma instância do Amazon EC2
+
 - Como deletar um grupo de segurança existente
 
 O cenário 
@@ -24,9 +26,6 @@ Aqui vamos usar uma série de modulos Node.js ára executar várias operações 
 - createSecurityGroup
 
 - deleteSecurityGroup
-
-- authorizeSecurityGroupIngress
-
 
 Pré requsiitos
 -----------------------------------
@@ -61,16 +60,26 @@ Edite o arquivo ecs_describesecuritygroups.js, e inclua os IDs dos grupos de seg
 $ node ec2_describesecuritygroups.js
 
 ---------------------------------------------------------
-2 - - createSecurityGroup
+2 - createSecurityGroup
 
 No arquivo ec2_createsecuritygroup altere os parâmetros que especificam o nome do grupo de segurança, uma descrição e o ID da VPC. Passe os parâmetros para o método createSecurityGroup e execute.
 
 $ node ec2_createsecuritygroup.js
 
+-------------------------------------------------------------
+3 - deleteSecurityGroup
+
+Altere os parâmetros no módulo JSON para especificar o nome do grupo de segurança a ser excluído. Depois, chame o método deleteSecurityGroup.
+
+$ node ec2_deletesecuritygroup.js
 
 
+Criando um Bucket
 
+Crie um nome exclusivo que seja utilizado um bucket do Amazon S3 anexando , neste caso'node-sdk-sample-'. Você gera o ID exclusivo chamando o módulo uuid. Crie um nome para o parâmetro Key usado para fazer upload de um objeto no bucket e execute o comando.
 
+$ node bucket.js
 
+Se a resposta for bem sucedida o Bucket foi criado.
 
 
