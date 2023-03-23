@@ -74,6 +74,16 @@ def lambda_handler(event, context):
 
 ```
 
+3 - Compacte o arquivo index.js em um arquivo .ZIP:
+---------------------------------------------
+
+```ruby
+zip my_lambda_function.zip index.js
+```
+
+
+
+
 
 Selecione a opção "Autor do zero" e escolha uma linguagem de programação compatível para sua aplicação. Em seguida, defina as permissões de execução para a função Lambda.
 
