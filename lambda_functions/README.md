@@ -48,6 +48,32 @@ resource "aws_iam_role_policy_attachment" "lambda_exec_policy" {
 ```
 Neste arquivo, estamos definindo um provedor AWS, uma função Lambda chamada my-lambda-function e um papel IAM que a função usará. Também estamos anexando a política AWSLambdaBasicExecutionRole ao papel IAM para conceder permissões básicas de execução da função.
 
+2 - Utilize o arquivo index.js com o código da sua função lambda
+---------------------------
+```ruby
+import boto3
+import json
+
+def lambda_handler(event, context):
+    # Extrai informações do evento
+    message = event['Records'][0]['Sns']['Message']
+    data = json.loads(message)
+    event_name = data['detail']['eventName']
+    group_id = data['detail']['requestParameters']['groupId']
+    bucket_name = 'SEU_BUCKET_NAME'
+    file_name = 'grupo_' + group_id + '.txt'
+    
+    # Cria o conteúdo do arquivo
+    content = f'Evento: {event_name}\nID do Grupo: {group_id}'
+    
+    # Faz o upload do arquivo para o S3
+    s3 = boto3.resource('s3')
+    s3.Bucket(bucket_name).put_object(Key=file_name, Body=content)
+    
+    return 'Arquivo criado e carregado com sucesso'
+
+```
+
 
 Selecione a opção "Autor do zero" e escolha uma linguagem de programação compatível para sua aplicação. Em seguida, defina as permissões de execução para a função Lambda.
 
