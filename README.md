@@ -1,7 +1,7 @@
 Desafio Builders
 --------
 
-A seguir, descrevo os passos gerais que poderiam ser seguidos para implementar uma função lambda da AWS que monitora as modificações em um grupo de segurança e envia informações para um bucket criado por uma API, usando um contêiner em Node.js e escrita em Java e AWS SDK:
+A seguir, descrevo os passos gerais que poderiam ser seguidos para implementar uma função lambda da AWS que monitora as modificações em um grupo de segurança e envia informações para um bucket criado por uma API, usando um contêiner em Node.js e escrita em Java e AWS SDK e utilizando o ECS Fargate como a melhor maneira de deployar a API:
 
 Configuração do ambiente:
 ----------------------
