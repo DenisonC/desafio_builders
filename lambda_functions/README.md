@@ -2,35 +2,58 @@ Para criar uma aplicação que execute uma tarefa sempre que um Security Group �
 
 A seguir, descrevemos os passos necessários para criar essa aplicação:
 
-Crie um novo bucket S3 no Amazon S3 Console e dê um nome para o bucket.
+Utilize o bicket que foi criado na API em java descrito no passo 2:
 
-Crie uma nova função do AWS Lambda para processar os eventos do CloudWatch. Para isso, abra o console do AWS Lambda, selecione "Funções" no menu principal e clique em "Criar função".
+Crie uma nova função do AWS Lambda para processar os eventos do CloudWatch. Para isso, vamos utilizar o Terraform.
+
+Para criar uma função Lambda com o Terraform na AWS, você pode seguir os seguintes passos:
+-------------------------
+
+Entre no diretório lambda_functions e edite o arquivo main.tf:
+
+provider "aws" {
+  region = "us-west-2" # substitua pela região desejada
+}
+
+resource "aws_lambda_function" "my_lambda_function" {
+  filename         = "my_lambda_function.zip"
+  function_name    = "my-lambda-function"
+  role             = aws_iam_role.lambda_exec.arn
+  handler          = "index.handler"
+  source_code_hash = filebase64sha256("my_lambda_function.zip")
+  runtime          = "nodejs12.x"
+}
+
+resource "aws_iam_role" "lambda_exec" {
+  name = "lambda-exec-role"
+  
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_exec_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  role       = aws_iam_role.lambda_exec.name
+}
+
+Neste arquivo, estamos definindo um provedor AWS, uma função Lambda chamada my-lambda-function e um papel IAM que a função usará. Também estamos anexando a política AWSLambdaBasicExecutionRole ao papel IAM para conceder permissões básicas de execução da função.
+
 
 Selecione a opção "Autor do zero" e escolha uma linguagem de programação compatível para sua aplicação. Em seguida, defina as permissões de execução para a função Lambda.
 
 Copie e cole o código de exemplo abaixo para o editor de código da função Lambda:
 
-#Código Lambda
-import boto3
-import json
 
-def lambda_handler(event, context):
-    # Extrai informações do evento
-    message = event['Records'][0]['Sns']['Message']
-    data = json.loads(message)
-    event_name = data['detail']['eventName']
-    group_id = data['detail']['requestParameters']['groupId']
-    bucket_name = 'SEU_BUCKET_NAME'
-    file_name = 'grupo_' + group_id + '.txt'
-    
-    # Cria o conteúdo do arquivo
-    content = f'Evento: {event_name}\nID do Grupo: {group_id}'
-    
-    # Faz o upload do arquivo para o S3
-    s3 = boto3.resource('s3')
-    s3.Bucket(bucket_name).put_object(Key=file_name, Body=content)
-    
-    return 'Arquivo criado e carregado com sucesso'
 
 Este código extrai informações do evento do CloudWatch e cria um arquivo de texto com essas informações. Em seguida, faz o upload do arquivo criado para o bucket S3 que você criou no passo 1.
 
