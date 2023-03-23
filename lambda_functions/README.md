@@ -10,7 +10,7 @@ Para criar uma função Lambda com o Terraform na AWS, você pode seguir os segu
 -------------------------
 
 Entre no diretório lambda_functions e edite o arquivo main.tf:
-```
+```ruby
 provider "aws" {
   region = "us-west-2" # substitua pela região desejada
 }
