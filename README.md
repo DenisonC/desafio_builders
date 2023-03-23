@@ -19,6 +19,6 @@ Escrita do código da função Lambda:
 O código da função Lambda deve ser escrito em Java e deve usar o AWS SDK para monitorar as modificações no grupo de segurança e enviar as informações para a API que criará o bucket S3. Para isso, pode-se usar as classes do AWS SDK que permitem acessar o grupo de segurança e obter as informações necessárias.
 
 Criação da infraestrutura como código:
-Por fim, a infraestrutura deve ser criada como código, usando uma ferramenta como o AWS CloudFormation. O código deve descrever a função Lambda, o grupo de segurança e o bucket S3, além de criar as permissões necessárias para que esses recursos possam se comunicar entre si.
+Por fim, a infraestrutura deve ser criada como código, usando o Terraform. O código deve criar um cluster ECS para o deploy da imagem de container armazenada no ECR, além de criar as permissões necessárias para que esses recursos possam se comunicar entre si.
 
 Concluindo, a implementação de uma lambda da AWS que monitora as modificações em um grupo de segurança e envia informações para um bucket criado por uma API, usando um contêiner em Node.js e escrita em Java e AWS SDK pode ser um processo complexo, mas é possível realizar com as ferramentas disponíveis na plataforma cloud da AWS.
