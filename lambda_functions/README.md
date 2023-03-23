@@ -10,7 +10,6 @@ Selecione a opção "Autor do zero" e escolha uma linguagem de programação com
 
 Copie e cole o código de exemplo abaixo para o editor de código da função Lambda:
 
-
 import boto3
 import json
 
