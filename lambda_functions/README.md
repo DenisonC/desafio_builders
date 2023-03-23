@@ -2,7 +2,7 @@ Para criar uma aplicação que execute uma tarefa sempre que um Security Group �
 
 A seguir, descrevemos os passos necessários para criar essa aplicação:
 
-Utilize o bicket que foi criado na API em java descrito no passo 2:
+Utilize o bucket que foi criado na API em java descrito no etapa 1:
 
 Crie uma nova função do AWS Lambda para processar os eventos do CloudWatch. Para isso, vamos utilizar o Terraform.
 
@@ -48,7 +48,7 @@ resource "aws_iam_role_policy_attachment" "lambda_exec_policy" {
 ```
 Neste arquivo, estamos definindo um provedor AWS, uma função Lambda chamada my-lambda-function e um papel IAM que a função usará. Também estamos anexando a política AWSLambdaBasicExecutionRole ao papel IAM para conceder permissões básicas de execução da função.
 
-2 - Utilize o arquivo index.js com o código da sua função lambda
+2 - Utilize o arquivo index.js com o código da sua função lambda:
 ---------------------------
 ```ruby
 import boto3
@@ -81,19 +81,26 @@ def lambda_handler(event, context):
 zip my_lambda_function.zip index.js
 ```
 
+4 - Execute o comando terraform init para inicializar o seu projeto.
+-----------------
+```ruby
+terraform init
+```
+
+5 - Execute o comando terraform apply para criar a função Lambda na AWS:
+-------------------------
+```ruby
+terraform apply
+```
+
+Ao final da execução deste comando, você deverá ver a saída mostrando que a função Lambda foi criada com sucesso.
 
 
+O código Lambda extrai informações do evento do CloudWatch e cria um arquivo de texto com essas informações. Em seguida, faz o upload do arquivo criado para o bucket S3 que você criou na etapa 1.
 
-
-Selecione a opção "Autor do zero" e escolha uma linguagem de programação compatível para sua aplicação. Em seguida, defina as permissões de execução para a função Lambda.
-
-Copie e cole o código de exemplo abaixo para o editor de código da função Lambda:
-
-
-
-Este código extrai informações do evento do CloudWatch e cria um arquivo de texto com essas informações. Em seguida, faz o upload do arquivo criado para o bucket S3 que você criou no passo 1.
-
-Configure o CloudWatch Events para acionar a função Lambda sempre que um Security Group for criado ou modificado. No console do CloudWatch, selecione "Eventos" no menu principal e clique em "Criar regra".
+6 - Configure o CloudWatch Events:
+----------------------------
+Para acionar a função Lambda sempre que um Security Group for criado ou modificado. No console do CloudWatch, selecione "Eventos" no menu principal e clique em "Criar regra".
 
 Na tela de configuração de regras do CloudWatch, defina as condições para acionar a função Lambda. Por exemplo, para acionar a função sempre que um Security Group for criado, configure a regra para "Criar SecurityGroup". Em seguida, selecione a função Lambda que você criou no passo 3 como o destino da regra.
 
