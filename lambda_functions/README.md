@@ -10,7 +10,7 @@ Para criar uma função Lambda com o Terraform na AWS, você pode seguir os segu
 -------------------------
 
 Entre no diretório lambda_functions e edite o arquivo main.tf:
-
+```
 provider "aws" {
   region = "us-west-2" # substitua pela região desejada
 }
@@ -45,7 +45,7 @@ resource "aws_iam_role_policy_attachment" "lambda_exec_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
   role       = aws_iam_role.lambda_exec.name
 }
-
+```
 Neste arquivo, estamos definindo um provedor AWS, uma função Lambda chamada my-lambda-function e um papel IAM que a função usará. Também estamos anexando a política AWSLambdaBasicExecutionRole ao papel IAM para conceder permissões básicas de execução da função.
 
 
