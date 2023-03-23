@@ -44,41 +44,52 @@ Insira o usuário e a key no arquivo credentials.
 
 Para buildar a imagem da nossa API vamos executar o seguinte comando:
 
+```ruby
 $ docker run -t node-docker-img . 
-
+```
 Execute o container da imagem
 
+```ruby
 $ docker run -dit --name node-docker node-docker-img
-
+```
 Com o container rodando execute o comando para acessar o contânier da API e executar as ações necessárias:
 
 ----------------------------------------------------------
-1 - describeSecurityGroups
+1 - describeSecurityGroups:
+----------------------------------
 
 Edite o arquivo ecs_describesecuritygroups.js, e inclua os IDs dos grupos de segurança que você deseja descrever. Depois chame odescribeSecurityGroupsMétodo do objeto de serviço do Amazon EC2.
 
+```ruby
 $ node ec2_describesecuritygroups.js
-
+```
 ---------------------------------------------------------
-2 - createSecurityGroup
+2 - createSecurityGroup:
+-----------------------------------------------
 
 No arquivo ec2_createsecuritygroup altere os parâmetros que especificam o nome do grupo de segurança, uma descrição e o ID da VPC. Passe os parâmetros para o método createSecurityGroup e execute.
 
+```ruby
 $ node ec2_createsecuritygroup.js
-
+```
 -------------------------------------------------------------
-3 - deleteSecurityGroup
+3 - deleteSecurityGroup:
+-----------------------------------------------
 
 Altere os parâmetros no módulo JSON para especificar o nome do grupo de segurança a ser excluído. Depois, chame o método deleteSecurityGroup.
 
+```ruby
 $ node ec2_deletesecuritygroup.js
-
+```
 
 Criando um Bucket
+---------------------------------------------
 
 Crie um nome exclusivo que seja utilizado um bucket do Amazon S3 anexando , neste caso'node-sdk-sample-'. Você gera o ID exclusivo chamando o módulo uuid. Crie um nome para o parâmetro Key usado para fazer upload de um objeto no bucket e execute o comando.
 
+```ruby
 $ node bucket.js
+```
 
 Se a resposta for bem sucedida o Bucket foi criado.
 
